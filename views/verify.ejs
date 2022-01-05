@@ -1,0 +1,46 @@
+<% if (session.reply == 'low') { %>
+<div>
+  <h2>TOO LOW!</h2>
+  <p>You took <strong><%= session.count %></strong> guesses.</p>
+  <p>Try again with a higher number.</p>
+</div>
+<% } %> <% if (session.reply == 'high') { %>
+<div>
+  <h2>TOO HIGH!</h2>
+  <p>You took <strong><%= session.count %></strong> guesses.</p>
+  <p>Try again with a lower number.</p>
+</div>
+<% } %> <% if (session.reply == 'correct') { %>
+<div>
+  <h2>You guessed it!</h2>
+  <p>
+    Congratulation,you took <strong><%= session.count %></strong> guesses to
+    guess the number <strong><%= session.number %></strong>.
+  </p>
+</div>
+<% } %> <% if (session.reply == 'invalid') { %>
+<div>
+  <h2>Invalid Guess!</h2>
+</div>
+<% } %>
+
+<h2>Choose a number between 1 and 100</h2>
+
+<div>
+  <form action="/verify" method="post">
+    <% if (session.status != 'gameover') { %>
+    <div>
+      <input type="text" name="guess" value="" placeholder="" required="True" />
+    </div>
+    <div>
+      <input type="submit" value="Submit" />
+    </div>
+    <p>
+      Or just <a href="/reset" role="button" name="reset"><b>Start Over</b></a>
+    </p>
+
+    <% } %> <% if (session.status == 'gameover') { %>
+    <a href="/reset" role="button" name="reset"><b>Start Over</b></a>
+    <% } %>
+  </form>
+</div>
