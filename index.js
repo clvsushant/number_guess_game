@@ -29,6 +29,8 @@ app.get('/play', function (req, res) {
   if (typeof req.session.count == 'undefined') {
     req.session.count = 0;
   }
+  console.log(req.session.number);
+  console.log(req.session.id);
   res.render('verify', { session: req.session });
 });
 
@@ -46,6 +48,7 @@ app.post('/verify', function (req, res) {
   } else {
     req.session.reply = 'invalid';
   }
+  console.log(req.body.guess);
   res.redirect('/play');
 });
 
