@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+const PORT = process.env.PORT;
 var app = express();
 
 app.use(
@@ -57,6 +58,6 @@ app.get('/reset', function (req, res) {
   res.redirect('/play');
 });
 
-app.listen(4000, function () {
-  console.log('listening on port 4000');
+app.listen(PORT, function () {
+  console.log(`listening on port ${PORT}`);
 });
