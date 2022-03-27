@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 var app = express();
 
 app.use(
@@ -36,7 +36,13 @@ app.get('/play', function (req, res) {
 });
 
 app.post('/verify', function (req, res) {
-  if (req.session.number > req.body.guess) {
+  if (
+    typeof +req.body.guess != 'number' ||
+    req.body.guess < 1 ||
+    req.body.guess > 100
+  ) {
+    req.session.reply = 'invalid';
+  } else if (req.session.number > req.body.guess) {
     req.session.reply = 'low';
     req.session.count++;
   } else if (req.session.number < req.body.guess) {
