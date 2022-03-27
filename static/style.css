@@ -1,4 +1,4 @@
 .content {
-  max-width: 500px;
+  max-width: fit-content;
   margin: auto;
 }
